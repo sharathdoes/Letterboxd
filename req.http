@@ -1,0 +1,14 @@
+####
+
+GET http://localhost:3000/getallmovies
+
+###
+
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "The Shutter Island",
+  "description": "Leo was trapped, on his own",
+  "runtime": 124
+}

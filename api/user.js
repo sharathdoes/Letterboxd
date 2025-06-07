@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import Log from "../models/log.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 export const login= async( req,res)=>{
@@ -58,3 +59,24 @@ export const register= async( req,res)=>{
     }
    
 }
+
+
+export const mylogs= async( req,res)=>{
+    try{
+        const {userId}=req.body;
+
+        if(!userId ){
+            return res.status(400).json({message:"send credentials bro"});
+        }
+    
+        const logs= await Log.find({userId});
+    
+        return res.status(200).json({logs, message:"success"});
+        
+    }
+    catch(err){
+        return res.status(404).json({message:err});
+    }
+   
+}
+

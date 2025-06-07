@@ -5,15 +5,18 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// import {getMovies,addMovie} from './api/movies.js';
-import {register, login} from './api/user.js'
+import {addMovie} from './api/movies.js';
+import {register,mylogs, login} from './api/user.js'
+import {addLog} from './api/logs.js'
 
 app.use(express.json());
 
 // app.get('/getallmovies',getMovies);
-// app.post('/addMovie',addMovie);
+app.post('/addMovie',addMovie);
+app.get('/mylogs',mylogs);
 app.post('/register',register);
 app.post('/login',login);
+app.post('/addLog',addLog);
 
 
 mongoose.connect(process.env.DATABASE_URL).then(()=>{

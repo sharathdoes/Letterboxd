@@ -37,3 +37,34 @@ Content-Type: application/json
   "password":"qwerty",
   "username":"Jet"
 }
+####
+
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title":"Django Unchained",
+  "description":"Black People rise against White",
+  "runtime":160,
+  "year":2012,
+  "genre":["action", "comedy"],
+  "DirectedBy":"Quentin Tarantino",
+  "cast":["Leonardo Dicaprio", "Jamie Fox", "Christoph waltz"]  
+}
+####
+
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId":"68447793c36378a43617a141", "sourceModel":"Movie", "logSourceId":"68447e73813a436b8d20f12d", "lotTitle":"Crazy Shit", "liked":true, "rating":5, "review":"Its just too crazy and bloody", "tags":["w/mom", "w/dad"]  
+}
+
+####
+
+GET  http://localhost:3000/mylogs
+Content-Type: application/json
+
+{
+  "userId":"68447793c36378a43617a141"
+}

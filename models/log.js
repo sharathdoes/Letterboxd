@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const LogSchema = new mongoose.Schema({
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
@@ -11,14 +11,14 @@ const LogSchema = new mongoose.Schema({
     required: true,
     enum: ['Movie', 'Series']
   },
-  logSource: {
+  logSourceId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     refPath: 'sourceModel'
   },
   logTitle: String,
   liked:    Boolean,
-  rating:   Number,
+  rating:   {type:Number, default:0},
   review:   String,
   tags:     [String]
 }, { timestamps: true });

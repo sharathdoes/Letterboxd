@@ -17,7 +17,7 @@ const UserSchema=new mongoose.Schema({
     },
     logs:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"logs"
+        ref:"Log"
     }]
 })
 

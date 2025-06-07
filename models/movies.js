@@ -9,14 +9,14 @@ const MoviesSchema = new mongoose.Schema({
   description: String,
   runtime: Number,
   year: Date,
-  AvgRating: Number,
-  likesCount: Number,
+  AvgRating: {type:Number, default:0},
+  likesCount: {type:Number, default:0},
   genre: [String],
   DirectedBy: String,
   cast: [String],
   logs: [{ 
     type: mongoose.Schema.Types.ObjectId,
-    ref: "logs" 
+    ref: "Log" 
   }]
 }, { timestamps: true });
 

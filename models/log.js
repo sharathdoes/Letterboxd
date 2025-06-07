@@ -1,39 +1,26 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const LogSchema=new mongoose.Schema({
+const LogSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  sourceModel: {
+    type: String,
+    required: true,
+    enum: ['Movie', 'Series']
+  },
+  logSource: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    refPath: 'sourceModel'
+  },
+  logTitle: String,
+  liked:    Boolean,
+  rating:   Number,
+  review:   String,
+  tags:     [String]
+}, { timestamps: true });
 
-    logSource: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        refPath: 'sourceModel'
-      },
-      sourceModel: {
-        type: String,
-        required: true,
-        enum: ['Movies', 'Series']
-      },
-    logtitle:{
-        type:String,
-    },
-    liked:{
-        type:Boolean,
-    },
-    isSeries:{
-        type:Boolean,
-    },
-    isMovie:{
-        type:Boolean,
-    },
-    rating:{
-        type:Number
-    },
-    review:{
-        type:String
-    },
-    tags:{
-        type:[String]
-    }
-})
-
-const Log= mongoose.model("logs", LogSchema)
-export default Log
+export default mongoose.model('Log', LogSchema);

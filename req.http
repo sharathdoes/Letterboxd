@@ -12,3 +12,28 @@ Content-Type: application/json
   "description": "Leo was trapped, on his own",
   "runtime": 124
 }
+
+
+
+
+####
+
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "email":"sharathbunny8055@gmail.com",
+  "password":"qwerty",
+  "username":"Jet"
+}
+
+
+####
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "password":"qwerty",
+  "username":"Jet"
+}

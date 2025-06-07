@@ -13,7 +13,11 @@ const MoviesSchema = new mongoose.Schema({
   likesCount: Number,
   genre: [String],
   DirectedBy: String,
-  cast: [String]
+  cast: [String],
+  logs: [{ 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "logs" 
+  }]
 }, { timestamps: true });
 
 const MoviesModel = mongoose.model("Movies", MoviesSchema);

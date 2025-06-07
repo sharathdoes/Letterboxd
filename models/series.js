@@ -13,7 +13,11 @@ const SeriesSchema = new mongoose.Schema({
   likesCount: Number,
   genre: [String],
   DirectedBy: String,
-  cast: [String]
+  cast: [String],
+  logs: [{ 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "logs" 
+  }]
 }, { timestamps: true });
 
 const SeriesModel = mongoose.model("Series", SeriesSchema);

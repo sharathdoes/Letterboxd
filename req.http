@@ -12,6 +12,22 @@ Content-Type: application/json
   "description": "Leo was trapped, on his own",
   "runtime": 124
 }
+###
+
+POST http://localhost:3000/searchMovie
+Content-Type: application/json
+
+{
+  "title":"T"
+}
+###
+
+POST http://localhost:3000/searchMovieByKey
+Content-Type: application/json
+
+{
+  "query":"Christopher Nolan"
+}
 
 
 
@@ -39,32 +55,164 @@ Content-Type: application/json
 }
 ####
 
+GET http://localhost:3000/stats
+
+### 1
 POST http://localhost:3000/addMovie
 Content-Type: application/json
 
 {
-  "title":"Django Unchained",
-  "description":"Black People rise against White",
-  "runtime":160,
-  "year":2012,
-  "genre":["action", "comedy"],
-  "DirectedBy":"Quentin Tarantino",
-  "cast":["Leonardo Dicaprio", "Jamie Fox", "Christoph waltz"]  
+  "title": "Inception",
+  "description": "A thief who steals corporate secrets through the use of dream-sharing technology.",
+  "runtime": 148,
+  "year": "2010-07-16",
+  "AvgRating": 8.8,
+  "likesCount": 12000,
+  "genre": ["Action", "Sci-Fi", "Thriller"],
+  "DirectedBy": "Christopher Nolan",
+  "cast": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"]
 }
-####
 
-POST http://localhost:3000/addLog
+### 2
+POST http://localhost:3000/addMovie
 Content-Type: application/json
 
 {
-  "userId":"68447793c36378a43617a141", "sourceModel":"Movie", "logSourceId":"68447e73813a436b8d20f12d", "lotTitle":"Crazy Shit", "liked":true, "rating":5, "review":"Its just too crazy and bloody", "tags":["w/mom", "w/dad"]  
+  "title": "Interstellar",
+  "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+  "runtime": 169,
+  "year": "2014-11-07",
+  "AvgRating": 8.6,
+  "likesCount": 9800,
+  "genre": ["Adventure", "Drama", "Sci-Fi"],
+  "DirectedBy": "Christopher Nolan",
+  "cast": ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"]
 }
 
-####
-
-GET  http://localhost:3000/mylogs
+### 3
+POST http://localhost:3000/addMovie
 Content-Type: application/json
 
 {
-  "userId":"68447793c36378a43617a141"
+  "title": "The Dark Knight",
+  "description": "Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+  "runtime": 152,
+  "year": "2008-07-18",
+  "AvgRating": 9.0,
+  "likesCount": 15000,
+  "genre": ["Action", "Crime", "Drama"],
+  "DirectedBy": "Christopher Nolan",
+  "cast": ["Christian Bale", "Heath Ledger", "Aaron Eckhart"]
+}
+
+### 4
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "Shutter Island",
+  "description": "In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane.",
+  "runtime": 138,
+  "year": "2010-02-19",
+  "AvgRating": 8.2,
+  "likesCount": 8600,
+  "genre": ["Mystery", "Thriller"],
+  "DirectedBy": "Martin Scorsese",
+  "cast": ["Leonardo DiCaprio", "Mark Ruffalo", "Ben Kingsley"]
+}
+
+### 5
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "The Matrix",
+  "description": "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
+  "runtime": 136,
+  "year": "1999-03-31",
+  "AvgRating": 8.7,
+  "likesCount": 11000,
+  "genre": ["Action", "Sci-Fi"],
+  "DirectedBy": "Lana Wachowski",
+  "cast": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
+}
+
+### 6
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "Fight Club",
+  "description": "An insomniac office worker and a devil-may-care soap maker form an underground fight club.",
+  "runtime": 139,
+  "year": "1999-10-15",
+  "AvgRating": 8.8,
+  "likesCount": 10300,
+  "genre": ["Drama"],
+  "DirectedBy": "David Fincher",
+  "cast": ["Brad Pitt", "Edward Norton", "Helena Bonham Carter"]
+}
+
+### 7
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "Parasite",
+  "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy and destitute Kim families.",
+  "runtime": 132,
+  "year": "2019-05-30",
+  "AvgRating": 8.6,
+  "likesCount": 9000,
+  "genre": ["Drama", "Thriller"],
+  "DirectedBy": "Bong Joon-ho",
+  "cast": ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong"]
+}
+
+### 8
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "The Shawshank Redemption",
+  "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption.",
+  "runtime": 142,
+  "year": "1994-09-23",
+  "AvgRating": 9.3,
+  "likesCount": 17000,
+  "genre": ["Drama"],
+  "DirectedBy": "Frank Darabont",
+  "cast": ["Tim Robbins", "Morgan Freeman"]
+}
+
+### 9
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "Avengers: Endgame",
+  "description": "The Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+  "runtime": 181,
+  "year": "2019-04-26",
+  "AvgRating": 8.4,
+  "likesCount": 20000,
+  "genre": ["Action", "Adventure", "Drama"],
+  "DirectedBy": "Anthony Russo",
+  "cast": ["Robert Downey Jr.", "Chris Evans", "Mark Ruffalo"]
+}
+
+### 10
+POST http://localhost:3000/addMovie
+Content-Type: application/json
+
+{
+  "title": "Joker",
+  "description": "In Gotham City, a mentally troubled comedian embarks on a downward spiral that leads to chaos.",
+  "runtime": 122,
+  "year": "2019-10-04",
+  "AvgRating": 8.5,
+  "likesCount": 9500,
+  "genre": ["Crime", "Drama", "Thriller"],
+  "DirectedBy": "Todd Phillips",
+  "cast": ["Joaquin Phoenix", "Robert De Niro", "Zazie Beetz"]
 }

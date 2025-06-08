@@ -1,8 +1,17 @@
 import MoviesModel from "../models/movies.js";
 
 export const addMovie = async (req, res) => {
-  const { title, AvgRating, likesCount,description, runtime, year, genre, DirectedBy, cast } =
-    req.body;
+  const {
+    title,
+    AvgRating,
+    likesCount,
+    description,
+    runtime,
+    year,
+    genre,
+    DirectedBy,
+    cast,
+  } = req.body;
   const exists = await MoviesModel.findOne({ title });
   if (exists) {
     return res.status(404).json({ message: "exists" });
@@ -16,7 +25,7 @@ export const addMovie = async (req, res) => {
     DirectedBy,
     cast,
     AvgRating,
-    likesCount
+    likesCount,
   });
   await movie.save();
   return res.status(200).json({ movie, message: "successs" });
@@ -59,16 +68,36 @@ export const searchMovieByKey = async (req, res) => {
   return res.status(200).json({ movies, message: "success" });
 };
 export const stats = async (req, res) => {
+  const top_5_liked_and_rated = await MoviesModel.find()
+    .sort({ likesCount: -1, AvgRating: -1 })
+    .limit(5);
+  const count_movies_nolan = await MoviesModel.countDocuments({
+    DirectedBy: "Christopher Nolan",
+  });
+  const movies_after_2015 = await MoviesModel.find({
+    year: { $gte: new Date("2015-01-01") },
+  });
+  const SixYearsAgo = new Date();
+  SixYearsAgo.setFullYear(SixYearsAgo.getFullYear() - 6);
+  const movies_released_last_6years = await MoviesModel.find({
+    year: { $gte: SixYearsAgo },
+  });
+  const movies_btw_120_180_duration = await MoviesModel.find({
+    $and: [{ runtime: { $gte: 120 } }, { runtime: { $lte: 180 } }],
+  });
+  const movies_by_descending_order = await MoviesModel.find()
+    .sort({ year: -1 })
+    .limit(5);
 
-  const top_5_liked_and_rated = await MoviesModel.find().sort({likesCount:-1,AvgRating:-1}).limit(5);
-  const count_movies_nolan = await MoviesModel.countDocuments({DirectedBy:"Christopher Nolan"});
-  const movies_after_2015= await MoviesModel.find({year: {$gte : new Date("2015-01-01")}}); 
-  const fiveYearsAgo = new Date();
-  fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
-  const movies_released_last_5years=await MoviesModel.find({year:{$gte:fiveYearsAgo}});
-  const movies_btw_120_180_duration=await MoviesModel.find({$and:[{runtime: {$gte:120}},{runtime:{$lte:180}}]});
-  const movies_by_descending_order=await MoviesModel.find().sort({year:-1}).limit(5);
-
-
-  return res.status(200).json({ top_5_liked_and_rated,  count_movies_nolan,  movies_after_2015, movies_released_last_5years, movies_btw_120_180_duration, movies_by_descending_order,message: "success" });
+  return res
+    .status(200)
+    .json({
+      top_5_liked_and_rated,
+      count_movies_nolan,
+      movies_after_2015,
+      movies_released_last_6years,
+      movies_btw_120_180_duration,
+      movies_by_descending_order,
+      message: "success",
+    });
 };

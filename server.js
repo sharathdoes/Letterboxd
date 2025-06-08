@@ -10,13 +10,13 @@ import {register,mylogs, login} from './api/user.js'
 import {addLog} from './api/logs.js'
 import {searchMovie,searchMovieByKey,stats} from './api/movies.js'
 app.use(express.json());
-
+import {auth_middleware} from './middlewares/auth_middleware.js'
 // app.get('/getallmovies',getMovies);
 app.post('/addMovie',addMovie);
 app.post('/searchMovie',searchMovie);
 app.get('/stats',stats);
 app.post('/searchMovieByKey',searchMovieByKey);
-app.get('/mylogs',mylogs);
+app.get('/mylogs',auth_middleware, mylogs);
 app.post('/register',register);
 app.post('/login',login);
 app.post('/addLog',addLog);

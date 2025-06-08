@@ -63,8 +63,9 @@ export const register= async( req,res)=>{
 
 export const mylogs= async( req,res)=>{
     try{
-        const {userId}=req.body;
-
+        const {id}=req.user;
+        console.log(id)
+        const userId=id;
         if(!userId ){
             return res.status(400).json({message:"send credentials bro"});
         }

@@ -35,3 +35,8 @@ export const addLog=async(req,res)=>{
     }
     return res.status(200).json({result, message:"success"});
 }
+
+export const deletelog=async()=>{
+    const {id}=req.user;
+    const 
+}

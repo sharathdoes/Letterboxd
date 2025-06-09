@@ -2,6 +2,8 @@ import User from "../models/user.js";
 import Log from "../models/log.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import SeriesModel from "../models/series.js";
+import MoviesModel from "../models/movies.js";
 export const login= async( req,res)=>{
     try{
         const {username, password}=req.body;
@@ -81,3 +83,26 @@ export const mylogs= async( req,res)=>{
    
 }
 
+
+export const reccs=async(req,res)=>{
+    const {id}=req.user;
+
+    const top_movie_logs= await Log.find({userId:id, sourceModel:"Movie"}).sort({rating:-1}).limit(5);
+    const top_series_logs= await Log.find({userId:id, sourceModel:"Series"}).sort({rating:-1}).limit(5);
+
+    const series_i_like=await SeriesModel.find({_id : {$in : top_movie_logs.map(log=>log.logSourceId)}})
+    const movies_i_like=await MoviesModel.find({_id : {$in : top_series_logs.map(log=>log.logSourceId)}})
+
+    let fav_genre_movies=movies_i_like.map(log=>log.genre).flat().filter(Boolean);
+    let fav_genre_series=series_i_like.map(log=>log.genre).flat().filter(Boolean);
+
+
+
+    let recc_movies=await MoviesModel.find({genre : {$in: fav_genre_movies}})
+
+    let recc_series=await SeriesModel.find({genre : {$in: fav_genre_series}})
+
+    return res.status(200).json({recc_movies, recc_series})
+
+
+}

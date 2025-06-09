@@ -51,7 +51,7 @@ Content-Type: application/json
 
 {
   "password":"qwerty",
-  "username":"Jet"
+  "username":"spike"
 }
 ####
 
@@ -251,13 +251,15 @@ Content-Type: application/json
   "cast": ["Bryan Cranston", "Aaron Paul"]
 }
 
+####
+
 POST http://localhost:3000/addLog
 Content-Type: application/json
 
 {
-  "userId": "abc",
+  "userId": "68469e2f8fe47a12ef9af99b",
   "sourceModel": "Movie",
-  "logSourceId": "abc",
+  "logSourceId": "684597df4ba39b63750ffc60",
   "logTitle": "Insane watch!",
   "liked": true,
   "rating": 4.5,
@@ -266,16 +268,18 @@ Content-Type: application/json
 }
 
 
+####
+
 POST http://localhost:3000/addLog
 Content-Type: application/json
 
 {
-  "userId": "abc",
-  "sourceModel": "Movie",
-  "logSourceId": "abc",
+  "userId": "68469e2f8fe47a12ef9af99b",
+  "sourceModel": "Series",
+  "logSourceId": "68469d8d1e6cfe61a4158f01",
   "logTitle": "Insane watch!",
   "liked": true,
-  "rating": 4.5,
+  "rating": 4.3,
   "review": "Loved the storyline and characters!",
   "tags": ["sci-fi", "intense"]
 }

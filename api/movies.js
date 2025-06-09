@@ -101,3 +101,8 @@ export const stats = async (req, res) => {
       message: "success",
     });
 };
+
+const leastliked=async(req,res)=>{
+  const movies=await MoviesModel.find().sort({AvgRating:1}).limit(5);
+  return res.status(200).json(movies);
+}

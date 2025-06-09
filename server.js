@@ -9,10 +9,13 @@ import {addMovie} from './api/movies.js';
 import {register,mylogs, login} from './api/user.js'
 import {addLog} from './api/logs.js'
 import {searchMovie,searchMovieByKey,stats} from './api/movies.js'
-app.use(express.json());
 import {auth_middleware} from './middlewares/auth_middleware.js'
-// app.get('/getallmovies',getMovies);
+import { addSeries } from './api/series.js';
+
+app.use(express.json());
+
 app.post('/addMovie',addMovie);
+app.post('/addSeries',addSeries);
 app.post('/searchMovie',searchMovie);
 app.get('/stats',stats);
 app.post('/searchMovieByKey',searchMovieByKey);

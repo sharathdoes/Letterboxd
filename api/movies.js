@@ -40,7 +40,7 @@ export const searchMovie = async (req, res) => {
         await MoviesModel.find({ genre: { $in: [genre[i]] } })
       );
   }
-
+  
   if (cast)
     for (var i = 0; i < cast.length; i++)
       movies = movies.concat(

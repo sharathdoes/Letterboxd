@@ -38,7 +38,7 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-  "email":"sharathbunny8055@gmail.com",
+  "email":"sharath@gmail.com",
   "password":"qwerty",
   "username":"spike"
 }
@@ -215,4 +215,343 @@ Content-Type: application/json
   "genre": ["Crime", "Drama", "Thriller"],
   "DirectedBy": "Todd Phillips",
   "cast": ["Joaquin Phoenix", "Robert De Niro", "Zazie Beetz"]
+}
+
+
+####
+
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "Dark",
+  "description": "A German sci-fi series that explores time travel.",
+  "runtime": 60,
+  "year": "2017-12-01",
+  "AvgRating": 4.8,
+  "likesCount": 125,
+  "genre": ["Sci-Fi", "Thriller"],
+  "DirectedBy": "Baran bo Odar",
+  "cast": ["Louis Hofmann", "Lisa Vicari"]
+}
+
+
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "Breaking Bad",
+  "description": "A chemistry teacher turned meth kingpin.",
+  "runtime": 47,
+  "year": "2008-01-20",
+  "AvgRating": 4.9,
+  "likesCount": 321,
+  "genre": ["Crime", "Drama"],
+  "DirectedBy": "Vince Gilligan",
+  "cast": ["Bryan Cranston", "Aaron Paul"]
+}
+
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abc",
+  "sourceModel": "Movie",
+  "logSourceId": "abc",
+  "logTitle": "Insane watch!",
+  "liked": true,
+  "rating": 4.5,
+  "review": "Loved the storyline and characters!",
+  "tags": ["sci-fi", "intense"]
+}
+
+
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abc",
+  "sourceModel": "Movie",
+  "logSourceId": "abc",
+  "logTitle": "Insane watch!",
+  "liked": true,
+  "rating": 4.5,
+  "review": "Loved the storyline and characters!",
+  "tags": ["sci-fi", "intense"]
+}
+
+####
+
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "Peaky Blinders",
+  "description": "A gangster family epic set in 1900s England.",
+  "runtime": 55,
+  "year": "2013-09-12",
+  "AvgRating": 4.7,
+  "likesCount": 300,
+  "genre": ["Crime", "Drama"],
+  "DirectedBy": "Steven Knight",
+  "cast": ["Cillian Murphy", "Helen McCrory", "Paul Anderson"]
+}
+
+
+####
+
+
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "The Boys",
+  "description": "A group of vigilantes fights corrupt superheroes who abuse their powers.",
+  "runtime": 60,
+  "year": "2019-07-26",
+  "AvgRating": 4.5,
+  "likesCount": 180,
+  "genre": ["Action", "Comedy", "Drama"],
+  "DirectedBy": "Eric Kripke",
+  "cast": ["Karl Urban", "Jack Quaid", "Antony Starr"]
+}
+
+####
+
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "Better Call Saul",
+  "description": "The origin story of Jimmy McGill, a small-time lawyer eventually becoming Saul Goodman.",
+  "runtime": 47,
+  "year": "2015-02-08",
+  "AvgRating": 4.8,
+  "likesCount": 240,
+  "genre": ["Crime", "Drama"],
+  "DirectedBy": "Vince Gilligan",
+  "cast": ["Bob Odenkirk", "Jonathan Banks", "Rhea Seehorn"]
+}
+
+####
+
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "The Mandalorian",
+  "description": "A bounty hunter travels the galaxy protecting a mysterious alien child.",
+  "runtime": 40,
+  "year": "2019-11-12",
+  "AvgRating": 4.4,
+  "likesCount": 160,
+  "genre": ["Action", "Sci-Fi", "Adventure"],
+  "DirectedBy": "Jon Favreau",
+  "cast": ["Pedro Pascal", "Carl Weathers", "Giancarlo Esposito"]
+}
+
+
+####
+
+
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "Mindhunter",
+  "description": "Two FBI agents delve deep into the psychology of serial killers.",
+  "runtime": 50,
+  "year": "2017-10-13",
+  "AvgRating": 4.3,
+  "likesCount": 140,
+  "genre": ["Crime", "Thriller", "Drama"],
+  "DirectedBy": "David Fincher",
+  "cast": ["Jonathan Groff", "Holt McCallany", "Anna Torv"]
+}
+
+
+
+####
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "Narcos",
+  "description": "A gritty look at the rise and fall of drug kingpin Pablo Escobar.",
+  "runtime": 49,
+  "year": "2015-08-28",
+  "AvgRating": 4.6,
+  "likesCount": 250,
+  "genre": ["Crime", "Drama", "Biography"],
+  "DirectedBy": "Chris Brancato",
+  "cast": ["Wagner Moura", "Pedro Pascal", "Boyd Holbrook"]
+}
+
+####
+POST http://localhost:3000/addSeries
+Content-Type: application/json
+
+{
+  "title": "Sherlock",
+  "description": "A modern update of the classic detective Sherlock Holmes.",
+  "runtime": 90,
+  "year": "2010-07-25",
+  "AvgRating": 4.9,
+  "likesCount": 290,
+  "genre": ["Mystery", "Crime", "Drama"],
+  "DirectedBy": "Paul McGuigan",
+  "cast": ["Benedict Cumberbatch", "Martin Freeman", "Andrew Scott"]
+}
+
+
+####
+
+### Log 1 – Movie
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser1",
+  "sourceModel": "Movie",
+  "logSourceId": "abcMovie1",
+  "logTitle": "Mind-blowing visuals!",
+  "liked": true,
+  "rating": 4.8,
+  "review": "The cinematography and plot twists were incredible.",
+  "tags": ["visuals", "plot-twist"]
+}
+
+### Log 2 – Movie
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser2",
+  "sourceModel": "Movie",
+  "logSourceId": "abcMovie2",
+  "logTitle": "Overrated",
+  "liked": false,
+  "rating": 2.3,
+  "review": "Felt too slow and the pacing was off.",
+  "tags": ["slow", "pacing"]
+}
+
+### Log 3 – Series
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser3",
+  "sourceModel": "Series",
+  "logSourceId": "abcSeries1",
+  "logTitle": "Binge-worthy!",
+  "liked": true,
+  "rating": 5,
+  "review": "Couldn’t stop watching—excellent character arcs.",
+  "tags": ["binge", "characters"]
+}
+
+### Log 4 – Series
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser1",
+  "sourceModel": "Series",
+  "logSourceId": "abcSeries2",
+  "logTitle": "Too dark",
+  "liked": false,
+  "rating": 3.0,
+  "review": "Great acting, but the tone was too depressing for me.",
+  "tags": ["tone", "acting"]
+}
+
+### Log 5 – Movie
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser4",
+  "sourceModel": "Movie",
+  "logSourceId": "abcMovie3",
+  "logTitle": "Classic must-watch",
+  "liked": true,
+  "rating": 4.9,
+  "review": "Timeless story and superb performances.",
+  "tags": ["classic", "performances"]
+}
+
+### Log 6 – Series
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser2",
+  "sourceModel": "Series",
+  "logSourceId": "abcSeries3",
+  "logTitle": "Suspenseful",
+  "liked": true,
+  "rating": 4.2,
+  "review": "Keeps you on the edge until the very end.",
+  "tags": ["suspense", "thriller"]
+}
+
+### Log 7 – Movie
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser5",
+  "sourceModel": "Movie",
+  "logSourceId": "abcMovie4",
+  "logTitle": "Great soundtrack",
+  "liked": true,
+  "rating": 4.5,
+  "review": "Music elevates every scene—highly recommend.",
+  "tags": ["soundtrack", "recommend"]
+}
+
+### Log 8 – Series
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser3",
+  "sourceModel": "Series",
+  "logSourceId": "abcSeries4",
+  "logTitle": "Characters shine",
+  "liked": true,
+  "rating": 4.7,
+  "review": "Ensemble cast steals the show every episode.",
+  "tags": ["characters", "ensemble"]
+}
+
+### Log 9 – Movie
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser4",
+  "sourceModel": "Movie",
+  "logSourceId": "abcMovie5",
+  "logTitle": "Not my cup of tea",
+  "liked": false,
+  "rating": 2.8,
+  "review": "Plot felt predictable despite good reviews.",
+  "tags": ["predictable", "disappointing"]
+}
+
+### Log 10 – Series
+POST http://localhost:3000/addLog
+Content-Type: application/json
+
+{
+  "userId": "abcUser5",
+  "sourceModel": "Series",
+  "logSourceId": "abcSeries5",
+  "logTitle": "Innovative format",
+  "liked": true,
+  "rating": 4.3,
+  "review": "Loved the anthology style—fresh every episode.",
+  "tags": ["anthology", "innovative"]
 }

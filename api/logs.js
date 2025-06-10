@@ -117,3 +117,20 @@ export const deletelog = async (req, res) => {
     }
   };
   
+
+  // userController.js (simplified)
+import { validationResult } from 'express-validator';
+// ... other imports
+
+export const registerUser = async (req, res) => {
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    // If validation passes, proceed with user registration logic
+    const { username, email, password } = req.body;
+    // ... hash password, save user to DB, etc.
+    res.status(201).json({ message: 'User registered successfully!' });
+};

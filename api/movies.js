@@ -40,7 +40,7 @@ export const searchMovie = async (req, res) => {
         await MoviesModel.find({ genre: { $in: [genre[i]] } })
       );
   }
-  
+
   if (cast)
     for (var i = 0; i < cast.length; i++)
       movies = movies.concat(
@@ -67,6 +67,7 @@ export const searchMovieByKey = async (req, res) => {
   });
   return res.status(200).json({ movies, message: "success" });
 };
+
 export const stats = async (req, res) => {
   const top_5_liked_and_rated = await MoviesModel.find()
     .sort({ likesCount: -1, AvgRating: -1 })
@@ -89,20 +90,18 @@ export const stats = async (req, res) => {
     .sort({ year: -1 })
     .limit(5);
 
-  return res
-    .status(200)
-    .json({
-      top_5_liked_and_rated,
-      count_movies_nolan,
-      movies_after_2015,
-      movies_released_last_6years,
-      movies_btw_120_180_duration,
-      movies_by_descending_order,
-      message: "success",
-    });
+  return res.status(200).json({
+    top_5_liked_and_rated,
+    count_movies_nolan,
+    movies_after_2015,
+    movies_released_last_6years,
+    movies_btw_120_180_duration,
+    movies_by_descending_order,
+    message: "success",
+  });
 };
 
-const leastliked=async(req,res)=>{
-  const movies=await MoviesModel.find().sort({AvgRating:1}).limit(5);
+export const leastliked = async (req, res) => {
+  const movies = await MoviesModel.find().sort({ AvgRating: 1 }).limit(5);
   return res.status(200).json(movies);
-}
+};

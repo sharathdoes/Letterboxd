@@ -1,4 +1,3 @@
-import { Loader } from "lucide-react";
 import Log from "../models/log.js";
 import MoviesModel from "../models/movies.js";
 import SeriesModel from "../models/series.js";

@@ -115,15 +115,15 @@ export const reccs=async(req,res)=>{
 export const myactivity =async(req,res)=>{
     const {id}=req.user;
 
-    const recent_logs=await Log.find().sort({createAt:-1}).limit(10);
-    const popular_reviews= await Log.find().sort({likes:-1}).limit(10);
-    const total_number_of_movies=await Log.countDocuments({_id : id, sourceModel:"Movie"})
-    const total_number_of_series=await Log.countDocuments({_id : id, sourceModel:"Series"})
+    const recent_logs=await Log.find({userId:id}).sort({createdAt:-1}).limit(10);
+    const popular_reviews= await Log.find({userId:id}).sort({likes:-1}).limit(10);
+    const total_number_of_movies=await Log.countDocuments({userId : id, sourceModel:"Movie"})
+    const total_number_of_series=await Log.countDocuments({userId : id, sourceModel:"Series"})
     const currentyear=new Date();
-    const Lastyear=currentyear.setFullYear(currentyear.getFullYear-1);
-    const total_movies_this_year=await Log.countDocuments({$and:{_id : id, sourceModel:"Movie", year:{$gte: Lastyear}}})
-    const ratings_graph_from_0_to_5=[await Log.countDocuments({rating:0}),await Log.countDocuments({rating:1}),await Log.countDocuments({rating:2}),await Log.countDocuments({rating:3}),await Log.countDocuments({rating:4}),await Log.countDocuments({rating:5})]
-    const my_tags_used=(await Logs.find()).map(log=>log.genre).flat().filter(Boolean);
+    currentyear.setFullYear(currentyear.getFullYear()-1);
+    const total_movies_this_year=await Log.countDocuments({$and:{userId : id, sourceModel:"Movie", createdAt:{$gte: currentyear}}})
+    const ratings_graph_from_0_to_5=[await Log.countDocuments({userId:id ,rating:0}),await Log.countDocuments({userId:id ,rating:1}),await Log.countDocuments({userId:id ,rating:2}),await Log.countDocuments({userId:id ,rating:3}),await Log.countDocuments({userId:id ,rating:4}),await Log.countDocuments({userId:id ,rating:5})]
+    const my_tags_used=(await Log.find({userId:id})).map(log=>log.tags).flat().filter(Boolean);
 
-    return res.status(200).json({recet})
+    return res.status(200).json({recent_logs, popular_reviews, total_movies_this_year, total_number_of_series, my_tags_used, total_number_of_movies, ratings_graph_from_0_to_5})
 }

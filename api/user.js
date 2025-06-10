@@ -38,19 +38,24 @@ export const login= async( req,res)=>{
 
 export const register= async( req,res)=>{
     try{
-        const {username, email, password}=req.body;
+        const validatedData = userSignupSchema.parse(req.body);
+    
+        const existingUser = await User.findOne({
+        $or: [
+            { username: validatedData.username },
+            { email: validatedData.email }
+        ]
+        });
+    
+         if (existingUser) {
+        return res.status(409).json({ 
+            message: "User with this username or email already exists" 
+        });
+        }
 
-        if(!email||!username || !password){
-            return res.status(400).json({message:"enter proper credentials bro"});
-        }
-    
-        const user= await User.findOne({username:username});
-    
-        if(user){
-            return res.status(401).json( { message:"Already a user exists"});
-        }
-        const hashedPassword=await bcrypt.hash(password,10);
-        const newuser=new User({email, username,password:hashedPassword});
+        const hashedPassword=await bcrypt.hash(validatedData.password,10);
+
+        const newuser=new User({email:validatedData.email, username:validatedData.username,password:hashedPassword});
 
         await newuser.save();
 

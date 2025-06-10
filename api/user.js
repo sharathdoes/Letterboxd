@@ -4,6 +4,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import SeriesModel from "../models/series.js";
 import MoviesModel from "../models/movies.js";
+import { Logs } from "lucide-react";
 export const login= async( req,res)=>{
     try{
         const {username, password}=req.body;
@@ -90,19 +91,39 @@ export const reccs=async(req,res)=>{
     const top_movie_logs= await Log.find({userId:id, sourceModel:"Movie"}).sort({rating:-1}).limit(5);
     const top_series_logs= await Log.find({userId:id, sourceModel:"Series"}).sort({rating:-1}).limit(5);
 
-    const series_i_like=await SeriesModel.find({_id : {$in : top_movie_logs.map(log=>log.logSourceId)}})
-    const movies_i_like=await MoviesModel.find({_id : {$in : top_series_logs.map(log=>log.logSourceId)}})
+    const those_movies_ids_movies= top_movie_logs.map(log=>log.logSourceId);
+    const those_movies_ids_series= top_series_logs.map(log=>log.logSourceId);
+
+    const series_i_like=await SeriesModel.find({_id : {$in :those_movies_ids_movies}})
+    const movies_i_like=await MoviesModel.find({_id : {$in : those_movies_ids_series}})
 
     let fav_genre_movies=movies_i_like.map(log=>log.genre).flat().filter(Boolean);
     let fav_genre_series=series_i_like.map(log=>log.genre).flat().filter(Boolean);
 
 
 
-    let recc_movies=await MoviesModel.find({genre : {$in: fav_genre_movies}})
+    let recc_movies=await MoviesModel.find({genre : {$in: fav_genre_movies}, _id :{$nin : those_movies_ids_movies}});
 
-    let recc_series=await SeriesModel.find({genre : {$in: fav_genre_series}})
+    let recc_series=await SeriesModel.find({genre : {$in: fav_genre_series},  _id :{$nin : those_movies_ids_series}})
 
     return res.status(200).json({recc_movies, recc_series})
 
 
+}
+
+
+export const myactivity =async(req,res)=>{
+    const {id}=req.user;
+
+    const recent_logs=await Log.find().sort({createAt:-1}).limit(10);
+    const popular_reviews= await Log.find().sort({likes:-1}).limit(10);
+    const total_number_of_movies=await Log.countDocuments({_id : id, sourceModel:"Movie"})
+    const total_number_of_series=await Log.countDocuments({_id : id, sourceModel:"Series"})
+    const currentyear=new Date();
+    const Lastyear=currentyear.setFullYear(currentyear.getFullYear-1);
+    const total_movies_this_year=await Log.countDocuments({$and:{_id : id, sourceModel:"Movie", year:{$gte: Lastyear}}})
+    const ratings_graph_from_0_to_5=[await Log.countDocuments({rating:0}),await Log.countDocuments({rating:1}),await Log.countDocuments({rating:2}),await Log.countDocuments({rating:3}),await Log.countDocuments({rating:4}),await Log.countDocuments({rating:5})]
+    const my_tags_used=(await Logs.find()).map(log=>log.genre).flat().filter(Boolean);
+
+    return res.status(200).json({recet})
 }

@@ -7,7 +7,7 @@ export const userSignupSchema = z.object({
     email: z.string().email("Invalid email format"),
     password: z.string().min(6, "Password must be at least 6 characters"),
   });
-  
+
 const UserSchema=new mongoose.Schema({
     username:{
         type:String,

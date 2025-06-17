@@ -84,7 +84,10 @@ export const stats = async (req, res) => {
     year: { $gte: SixYearsAgo },
   });
   const movies_btw_120_180_duration = await MoviesModel.find({
-    $and: [{ runtime: { $gte: 120 } }, { runtime: { $lte: 180 } }],
+    $or: [
+      { runtime: { $gte: 120, $lte: 180 } },
+      { year: { $gte: SixYearsAgo } }
+    ]
   });
   const movies_by_descending_order = await MoviesModel.find()
     .sort({ year: -1 })

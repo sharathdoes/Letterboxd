@@ -32,28 +32,26 @@ export const addMovie = async (req, res) => {
 };
 
 export const searchMovie = async (req, res) => {
-  const { genre, cast, title } = req.body;
-  let movies = [];
-  if (genre) {
-    for (var i = 0; i < genre.length; i++)
-      movies = movies.concat(
-        await MoviesModel.find({ genre: { $in: [genre[i]] } })
-      );
+  try {
+    const { genre, cast, title } = req.body;
+
+    const orConditions = [];
+
+    genre?.length && orConditions.push({ genre: { $in: genre } });
+    cast?.length && orConditions.push({ cast: { $in: cast } });
+    title && orConditions.push({ title: { $regex: title, $options: "i" } });
+
+    const movies = orConditions.length
+      ? await MoviesModel.find({ $or: orConditions })
+      : await MoviesModel.find({}); // fallback: return all
+
+    return res.status(200).json({ movies, message: "success" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
   }
-
-  if (cast)
-    for (var i = 0; i < cast.length; i++)
-      movies = movies.concat(
-        await MoviesModel.find({ cast: { $in: [cast[i]] } })
-      );
-
-  if (title)
-    movies = movies.concat(
-      await MoviesModel.find({ title: { $regex: title, $options: "i" } })
-    );
-
-  return res.status(200).json({ movies, message: "success" });
 };
+
 
 export const searchMovieByKey = async (req, res) => {
   const { query } = req.body;
